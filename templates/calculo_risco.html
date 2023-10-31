@@ -1,0 +1,185 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Estratificação de Risco Cardiovascular</title>
+    <link rel="stylesheet" href="{%static 'style.css'%}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!--!!!!!!CADA SESSÃO DEVE MOSTRAR A QUANTIDADE DE FATORES DE RISCOS ESCOLHIDOS!!!!!!!! -->
+</head>
+<body>
+    <header class="cabecalho">
+        <nav class="navbar">
+              <a class="navbar-brand" href="{% url 'calculo_risco' %}">
+                <img src="{%static 'imagens/logo_sertao.png'%}" alt="Sertao_cuidado" width="150" height="60">
+              </a>
+          </nav>
+    </header>
+    <div class="paragrafo">
+        <p>Preencha os campos com cuidado para ter um retorno preciso dos resultados</p>
+    </div>
+    <div class="titulo">
+        <h1>Instrumento de Estratificação de Risco Cardiovascular</h1>
+        {% if calculo_risco != None %}
+        <h2>Calculo de risco é {{calculo_risco}}</h2>
+        {% endif %}
+    </div>
+    
+    <form action="{% url 'calculo_risco'%}" enctype="multipart/form-data"  method="POST" autocomplete="off">
+        {% csrf_token %}
+        <label for="hipertenso">É hipertenso?</label>
+        <input type="checkbox" name="hipertenso" value="Sim"> Sim
+        <input type="checkbox" name="hipertenso" value="Não"> Não<br>
+
+        <label for="diabetico">É diabético?</label>
+        <input type="checkbox" name="diabetico" value="Sim"> Sim
+        <input type="checkbox" name="diabetico" value="Não"> Não<br>
+
+        <label for="insulono">Insulino?</label>
+        <input type="checkbox" name="insulono" value="Sim"> Sim
+        <input type="checkbox" name="insulono" value="Não"> Não<br>
+
+        <label for="amg">Auto monitoramento glicemico?</label>
+        <input type="checkbox" name="amg" value="Sim"> Sim
+        <input type="checkbox" name="amg" value="Não"> Não<br>
+
+        <label for="covid">Teve covid?</label>
+        <input type="checkbox" name="covid" value="Sim"> Sim
+        <input type="checkbox" name="covid" value="Não"> Não<br>
+
+        <label for="complicacao">Se sim, teve complicações?</label>
+        <input type="checkbox" name="complicacao" value="Sim"> Sim
+        <input type="checkbox" name="complicacao" value="Não"> Não<br>
+
+        <label for="peso">Peso do Paciente (kg):</label>
+        <input type="number" id="peso" name="peso" min="0" step="0.1" required>
+        
+        <label for="pressao_arterial">Pressão Arterial:</label>
+        <input type="text" id="pressao_arterial" name="pressao_arterial" required>
+        
+        <label for="imc">IMC:</label>
+        <input type="number" id="imc" name="imc" step="0.1" min="0" required>
+        
+        <label for="circunferencia_abdominal">Circunferência Abdominal (cm):</label>
+        <input type="number" id="circunferencia_abdominal" name="circunferencia_abdominal" min="0" required>
+        
+        <label for="altura">Altura (m):</label>
+        <input type="number" id="altura" name="altura" step="0.01" min="0" required>
+        
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" name="sexo" required>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+        </select>
+        
+        <label for="raca_cor">Raça/Cor:</label>
+        <select id="raca_cor" name="raca_cor" required>
+            <option value="branca">Branca</option>
+            <option value="preta">Preta</option>
+            <option value="parda">Parda</option>
+            <option value="amarela">Amarela</option>
+            <option value="indigena">Indígena</option>
+        </select>
+                
+        <!-- Seção 1 - Profissionais de Saúde de Nível Superior -->
+        <h2>Fatores de risco Cardiovascular na avaliação de risco adicional no hipertenso</h2>
+        
+        <label for="sexo">Masculino</label>
+        <input type="radio" name="sexo" value="Masculino"> Sim
+        <input type="radio" name="sexo" value="Feminino"> Não<br>
+        
+        <label for="idade">Idade (homem >55 anos ou mulheres >65 anos)</label>
+        <input type="radio" name="idade" value="Idade"> Sim
+        <input type="radio" name="idade" value="Idade"> Não<br>
+        
+        <label for="historico_dcv">Histórico de DCV prematura em parentes de primeiro grau:</label>
+        <input type="radio" name="historico_dcv" value="HistoricoDCV"> Sim
+        <input type="radio" name="historico_dcv" value="HistoricoDCV"> Não<br>
+        
+        <label for="tabagismo">Tabagismo</label>
+        <input type="radio" name="tabagismo" value="Tabagismo"> Sim
+        <input type="radio" name="tabagismo" value="Tabagismo"> Não<br>
+        
+        <label for="diabetes">Diabetes melito (DM) já confirmado (glicemia de jejum de, pelo menos, 8 horas ≥ 126mg/dL, glicemia aleatória ≥ 200mg/dL ou HbA1c ≥ 6,5%) ou pré-diabetes (glicemia de jejum entre100 e 125 mg/dL ou HbA1c entre 5,7 e 6,4%)</label>
+        <input type="radio" name="diabetes" value="Diabetes"> Sim
+        <input type="radio" name="diabetes" value="Diabetes"> Não<br>
+        
+        <label for="obesidade">Obesidade: IMC ≥ 30kg/m² ou CA ≥ 94 cm nos homens ou
+        80 ≥ cm de mulheres</label>
+        <input type="radio" name="obesidade" value="Obesidade"> Sim
+        <input type="radio" name="obesidade" value="Obesidade"> Não<br>
+        
+        <label for="dislipidemia">Dislipidemia: triglicerídeos > 150 mg/ dl e/ou LDL-C >100
+        mg/ dl e/ou HLD-C &lt;40 mg/ dl </label>
+        <input type="radio" name="dislipidemia" value="Dislipidemia"> Sim
+        <input type="radio" name="dislipidemia" value="Dislipidemia"> Não<br>
+        
+        <!-- Seção 2 - Profissional Médico / Enfermeiro -->
+        <h2>Lesão de Órgão Alvo</h2>
+        
+        <label for="hipertrofia_ventricular">Hipertrofia Ventricular Esquerda (HVE):</label>
+        <input type="radio" name="hipertrofia_ventricular" value="Sim"> Sim
+        <input type="radio" name="hipertrofia_ventricular" value="Não"> Não<br>
+
+        <label for="microalbuminuria">Hipertrofia Microalbuminúria: 30 - 300 mg/ 24 horas ou relação albumina/creatinina urinária 30 - 300mg/g:</label>
+        <input type="radio" name="microalbuminuria" value="Sim"> Sim
+        <input type="radio" name="microalbuminuria" value="Não"> Não<br>
+
+        <label for="doenca_renal_cronica">Doença renal crônica estágio 3 (RFG-e 30 - 60 ml/min/1,73m²):</label>
+        <input type="radio" name="doenca_renal_cronica" value="Sim"> Sim
+        <input type="radio" name="doenca_renal_cronica" value="Não"> Não<br>
+
+        <label for="indice_tornozelo">Índice tornozelo -braquial (ITB): < 0,9¹</label>
+        <input type="radio" name="indice_tornozelo" value="Sim"> Sim
+        <input type="radio" name="indice_tornozelo" value="Não"> Não<br>
+
+        <label for="espessura_mediointimal">Espessura mediointimal (EMI) da carótida: > 0,9 mm ou placa carotídea, se indicado¹∙²</label>
+        <input type="radio" name="espessura_mediointimal" value="Sim"> Sim
+        <input type="radio" name="espessura_mediointimal" value="Não"> Não<br>
+        
+        <!-- Seção 3 - Doença Cardiovascular ou Renal estabelecida -->
+        <h2>Doença Cardiovascular ou Renal estabelecida</h2>
+
+        <label for="ave_isquêmico">AVE isquêmico ou;</label>
+        <input type="radio" name="ave_isquêmico" value="Sim"> Sim
+        <input type="radio" name="ave_isquêmico" value="Não"> Não<br>
+
+        <label for="hemorragia_cerebral">Hemorragia cerebral ou;</label>
+        <input type="radio" name="hemorragia_cerebral" value="Sim"> Sim
+        <input type="radio" name="hemorragia_cerebral" value="Não"> Não<br>
+
+        <label for="ataque_isquemico">Ataque isquêmico transitório (AIT).</label>
+        <input type="radio" name="ataque_isquemico" value="Sim"> Sim
+        <input type="radio" name="ataque_isquemico" value="Não"> Não<br>
+
+        <label for="angina_estavel">Angina estável ou instável ou;</label>
+        <input type="radio" name="angina_estavel" value="Sim"> Sim
+        <input type="radio" name="angina_estavel" value="Não"> Não<br>
+
+        <label for="infarto_miocardio">Infarto do Miocárdio ou;</label>
+        <input type="radio" name="infarto_miocardio" value="Sim"> Sim
+        <input type="radio" name="infarto_miocardio" value="Não"> Não<br>
+
+        <label for="revascularizacao_miocardio">Revascularização do miocardio (angioplastia ou cirurgia) ou;</label>
+        <input type="radio" name="revascularizacao_miocardio" value="Sim"> Sim
+        <input type="radio" name="revascularizacao_miocardio" value="Não"> Não<br>
+
+        <label for="clinica_insuficiencia_cardiaca">Clínica de insuficiência cardíaca e/ou fração de ejeção reduzida FEVE &lt; 40;</label>
+        <input type="radio" name="clinica_insuficiencia_cardiaca" value="Sim"> Sim
+        <input type="radio" name="clinica_insuficiencia_cardiaca" value="Não"> Não<br>
+
+        <label for="doenca_arterial_periferica">Doença arterial periférica sintomática dos membros inferiores ou;</label>
+        <input type="radio" name="doenca_arterial_periferica" value="Sim"> Sim
+        <input type="radio" name="doenca_arterial_periferica" value="Não"> Não<br>
+
+        <label for="doenca_estagio_4">Doença renal crônica estagio 4 (RFG-e < 30 ml/min/1,73m²) ou albuminúria > (300mg / 24h) ou;</label>
+        <input type="radio" name="doenca_estagio_4" value="Sim"> Sim
+        <input type="radio" name="doenca_estagio_4" value="Não"> Não<br>      
+            <button type="submit">Calcular Risco</button>
+    </form>
+</body>
+</html>

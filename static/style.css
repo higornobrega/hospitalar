@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+label, textarea {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: calc(100% - 20px);
+    height: 100px;
+}
+
+input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    textarea {
+        width: calc(100% - 40px);
+    }
+}
+
+@media (min-width: 992px) {
+    body {
+        margin: 50px;
+    }
+}
+
+.cabecalho {
+    margin-bottom: 45px;
+}
+
+.navbar{
+    background:#004C76 ;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, #DFA952 0px 6px 0px 0px;
+}
+
+.titulo{
+    background: linear-gradient(to right, #006CA7, #003350);
+    text-align: center;
+    margin-left: 200px;
+    margin-right: 200px;
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.paragrafo{
+    text-align: center;
+    color: #656565;
+}
