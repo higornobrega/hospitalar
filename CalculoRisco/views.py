@@ -16,16 +16,70 @@ def calculo_risco(request):
         complicacao = request.POST.get('complicacao', '')
         peso = request.POST.get('peso', '')
         
-        print(hipertenso)
-        print(diabetico)
-        print(insulono)
-        print(amg)
-        print(covid)
-        print(complicacao)
-        print(peso)
+        imc = request.POST.get('imc','')
+        circunferencia_abdominal = request.POST.get('circunferencia_abdominal','')
+        altura = request.POST.get('altura','')
+        raca_cor = request.POST.get('raca_cor','')
+        raca_cor = request.POST.get('raca_cor','')
+        
+        pressao_arterial_sistolica = request.POST.get('pressao_arterial_sistolica')
+        pressao_arterial_diastolica = request.POST.get('pressao_arterial_diastolica')
+        
+        #SEÇÃO 1
+        sexo = request.POST.get('sexo','')
+        idade = request.POST.get('idade','')
+        historico_dcv = request.POST.get('historico_dcv','')
+        tabagismo = request.POST.get('tabagismo','')
+        diabetes = request.POST.get('diabetes','')
+        obesidade = request.POST.get('obesidade','')
+        dislipidemia = request.POST.get('dislipidemia','')
+        
+        #SEÇÃO 2
+        hipertrofia_ventricular = request.POST.get('hipertrofia_ventricular','')
+        microalbuminuria = request.POST.get('microalbuminuria','')
+        doenca_renal_cronica = request.POST.get('doenca_renal_cronica','')
+        indice_tornozelo = request.POST.get('indice_tornozelo','')
+        espessura_mediointimal = request.POST.get('espessura_mediointimal','')
+        
+        # SEÇÃO 3
+        ave_isquêmico = request.POST.get('ave_isquêmico','')
+        hemorragia_cerebral = request.POST.get('hemorragia_cerebral','')
+        ataque_isquemico = request.POST.get('ataque_isquemico','')
+        angina_estavel = request.POST.get('angina_estavel','')
+        infarto_miocardio = request.POST.get('infarto_miocardio','')
+        revascularizacao_miocardio = request.POST.get('revascularizacao_miocardio','')
+        clinica_insuficiencia_cardiaca = request.POST.get('clinica_insuficiencia_cardiaca','')
+        doenca_arterial_periferica = request.POST.get('angina_estavel','')
+        doenca_estagio_4 = request.POST.get('doenca_estagio_4','')
+        retinopatia_avancada = request.POST.get('retinopatia_avancada','')
+        
+
+        lista_secao_1 = [sexo,idade,historico_dcv,tabagismo,diabetes,obesidade,dislipidemia]
+        lista_secao_2 = [hipertrofia_ventricular,microalbuminuria,doenca_renal_cronica,indice_tornozelo,espessura_mediointimal]
+        lista_secao_3 = [ave_isquêmico,hemorragia_cerebral,ataque_isquemico,angina_estavel,infarto_miocardio,revascularizacao_miocardio,clinica_insuficiencia_cardiaca,doenca_arterial_periferica,doenca_estagio_4,retinopatia_avancada]
+        
+        quantidade_secao_1 = lista_secao_1.count('Sim')
+        quantidade_secao_2 = lista_secao_2.count('Sim')
+        quantidade_secao_3 = lista_secao_3.count('Sim')
+        
+        if quantidade_secao_3 >= 1:
+            calculo_risco = "RISCO ALTO COM DOENÇA RENAL OU CARDIOVASCULAR ESTABELECIDA"
+        elif quantidade_secao_2 >= 1:
+            calculo_risco = "RISCO ALTO"
+        elif lista_secao_1 == 0 and pressao_arterial_sistolica < 130 and pressao_arterial_diastolica < 85 and diabetes == 'Sim':
+            calculo_risco = "SEM RISCO"
+        elif lista_secao_1 == 0 and pressao_arterial_sistolica >= 130 and pressao_arterial_sistolica >= 139 and pressao_arterial_diastolica >= 85 and pressao_arterial_diastolica <= 89:
+            calculo_risco = "SEM RISCO"
+            
+        
+    
+        print(quantidade_secao_1)
+        print(quantidade_secao_2)
+        print(quantidade_secao_3)
+      
         
         # Faça o calculo de risco 
-        calculo_risco = 1
+        
         
         context = {
             'calculo_risco': calculo_risco,
