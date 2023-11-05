@@ -53,14 +53,12 @@ input[type="submit"] {
 .titulo{
     background: linear-gradient(to right, #006CA7, #003350);
     text-align: center;
-    margin-left: 200px;
-    margin-right: 200px;
     color: white;
-    border-radius: 10px;
-    margin-bottom: 30px;
+    border-radius: 5px;
 }
 
 .paragrafo{
     text-align: center;
     color: #656565;
 }
+
