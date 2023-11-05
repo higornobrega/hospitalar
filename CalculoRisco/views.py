@@ -62,24 +62,36 @@ def calculo_risco(request):
         quantidade_secao_2 = lista_secao_2.count('Sim')
         quantidade_secao_3 = lista_secao_3.count('Sim')
         
+        pressao_arterial_diastolica = int(pressao_arterial_diastolica)
+        pressao_arterial_sistolica = int(pressao_arterial_sistolica)
+        
         if quantidade_secao_3 >= 1:
             calculo_risco = "RISCO ALTO COM DOENÇA RENAL OU CARDIOVASCULAR ESTABELECIDA"
         elif quantidade_secao_2 >= 1:
             calculo_risco = "RISCO ALTO"
-        elif lista_secao_1 == 0 and pressao_arterial_sistolica < 130 and pressao_arterial_diastolica < 85 and diabetes == 'Sim':
-            calculo_risco = "SEM RISCO"
-        elif lista_secao_1 == 0 and pressao_arterial_sistolica >= 130 and pressao_arterial_sistolica >= 139 and pressao_arterial_diastolica >= 85 and pressao_arterial_diastolica <= 89:
-            calculo_risco = "SEM RISCO"
             
+        elif quantidade_secao_1 == 0 and pressao_arterial_sistolica < 130 and pressao_arterial_diastolica < 85 and diabetico == 'Sim':
+            calculo_risco = "SEM RISCO"
         
-    
+        elif quantidade_secao_1 == 0 and pressao_arterial_sistolica >= 130 and pressao_arterial_sistolica <= 139:
+            if pressao_arterial_diastolica >= 85 and pressao_arterial_diastolica <= 89:
+                calculo_risco = "SEM RISCO"
+            elif pressao_arterial_diastolica >= 90 and pressao_arterial_diastolica <= 99:
+                calculo_risco = "RISCO BAIXO"
+                
+        elif quantidade_secao_1 == 0 and pressao_arterial_sistolica >= 140 and pressao_arterial_sistolica <= 159:
+           if pressao_arterial_diastolica >= 90 and pressao_arterial_diastolica <= 99:
+            calculo_risco = "RISCO BAIXO"
+           elif pressao_arterial_diastolica >= 100 and pressao_arterial_diastolica <= 109:
+            calculo_risco = "RISCO MODERADO"
+
+               
+        
         print(quantidade_secao_1)
         print(quantidade_secao_2)
         print(quantidade_secao_3)
       
-        
-        # Faça o calculo de risco 
-        
+    
         
         context = {
             'calculo_risco': calculo_risco,
