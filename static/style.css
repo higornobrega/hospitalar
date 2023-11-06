@@ -53,8 +53,11 @@ input[type="submit"] {
 .titulo{
     background: linear-gradient(to right, #006CA7, #003350);
     text-align: center;
+    margin-left: 200px;
+    margin-right: 200px;
     color: white;
-    border-radius: 5px;
+    border-radius: 10px;
+    margin-bottom: 30px;
 }
 
 .paragrafo{
@@ -62,3 +65,18 @@ input[type="submit"] {
     color: #656565;
 }
 
+.cores{
+    background-color: #eaeaea;
+    border-radius: 10px;
+    max-width: 85%;
+    
+}
+
+
+.linha{
+    width: 100%;
+}
+
+.btn.btn-outline-secondary{
+    padding: 5px 20px 5px 20px;
+}
