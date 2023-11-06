@@ -8,6 +8,7 @@
     <title>Formulário de Estratificação de Risco Cardiovascular</title>
     <link rel="icon" href="static\imagens\Frame_6.png" type="image/x-icon">
     <link rel="stylesheet" href="{%static 'style.css'%}">
+    <link rel="stylesheet" type="text/css" href="/hospitalar/static/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!--!!!!!!CADA SESSÃO DEVE MOSTRAR A QUANTIDADE DE FATORES DE RISCOS ESCOLHIDOS!!!!!!!! -->
 </head>
@@ -24,9 +25,9 @@
     </div>
     <div class="titulo">
         <h1>Instrumento de Estratificação de Risco Cardiovascular</h1>
-        {% if calculo_risco != None %}
+        <!-- {% if calculo_risco != None %}
         <h2>Calculo de risco é {{calculo_risco}}</h2>
-        {% endif %}
+        {% endif %} -->
     </div>
     
     <form action="{% url 'calculo_risco'%}" enctype="multipart/form-data"  method="POST" autocomplete="off">
@@ -141,61 +142,93 @@
         <div class="container overflow-hidden">
             <div class="row mb-4">
                 <div class="col">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="sexo">Masculino</label>
+                    <div class="d-flex justify-content-between align-items-center mb-3" id="color">
+                        
+                        <label class="linha cores p-2" for="sexo">Masculino</label>
+                        
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" id="Masculino" name="sexo" value="Sim">
-                            <label class="btn btn-outline-secondary" for="Masculino">Sim</label>
-                            <input type="radio" class="btn-check" id="Feminino" name="sexo" value="Não">
-                            <label class="btn btn-outline-secondary" for="Feminino">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" id="Masculino" name="sexo" value="Sim">
+                                <label class="btn btn-outline-secondary" for="Masculino">Sim</label>
+                                <input type="radio" class="btn-check" id="Feminino" name="sexo" value="Não">
+                                <label class="btn btn-outline-secondary" for="Feminino">Não</label>
+                            </div>
                         </div>
                     </div>
-                    <label for="idade">Idade (homem &gt; 55 anos ou mulheres &gt; 65 anos)</label>
-                    <div class="text-end">
-                        <input type="radio" class="btn-check" id="idade" name="idade" value="Sim">
-                        <label class="btn btn-outline-secondary" for="idade">Sim</label>
-                        <input type="radio" class="btn-check" id="idade_2" name="idade" value="Não">
-                        <label class="btn btn-outline-secondary" for="idade_2">Não</label>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        
+                        <label class="linha cores p-2" for="idade">Idade (homem &gt; 55 anos ou mulheres &gt; 65 anos)</label>
+                        
+                        <div class="d-flex">
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" id="idade" name="idade" value="Sim">
+                                <label class="btn btn-outline-secondary" for="idade">Sim</label>
+                                <input type="radio" class="btn-check" id="idade_2" name="idade" value="Não">
+                                <label class="btn btn-outline-secondary" for="idade_2">Não</label>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <label class="linha cores p-2" for="historico_dcv">Histórico de DCV prematura em parentes de primeiro grau:</label>
+                        <div class="d-flex">
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" id="historico_dcv" name="historico_dcv" value="Sim">
+                                <label class="btn btn-outline-secondary" for="historico_dcv">Sim</label>
+                                <input type="radio" class="btn-check" id="historico_dcv_2" name="historico_dcv" value="Não">
+                                <label class="btn btn-outline-secondary" for="historico_dcv_2">Não</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">    
+                        <label class="linha cores p-2" for="tabagismo">Tabagismo</label>
+                        <div class="d-flex">
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" id="tabagismo" name="tabagismo" value="Sim">
+                                <label class="btn btn-outline-secondary" for="tabagismo">Sim</label>
+                                <input type="radio" class="btn-check" id="tabagismo_2" name="tabagismo" value="Não">
+                                <label class="btn btn-outline-secondary" for="tabagismo_2">Não</label>
+                            </div>
+                        </div>
+                    </div>
+
                     
-                    <label for="historico_dcv">Histórico de DCV prematura em parentes de primeiro grau:</label>
-                    <div class="text-end">
-                        <input type="radio" class="btn-check" id="historico_dcv" name="historico_dcv" value="Sim">
-                        <label class="btn btn-outline-secondary" for="historico_dcv">Sim</label>
-                        <input type="radio" class="btn-check" id="historico_dcv_2" name="historico_dcv" value="Não">
-                        <label class="btn btn-outline-secondary" for="historico_dcv_2">Não</label>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <label class="linha cores p-2" for="diabetes">Diabetes melito (DM) já confirmado (glicemia de jejum de, pelo menos, 8 horas &ge; 126mg/dL, glicemia aleatória &ge; 200mg/dL ou HbA1c &ge; 6,5%) ou pré-diabetes (glicemia de jejum entre 100 e 125 mg/dL ou HbA1c entre 5,7 e 6,4%)</label>
+                        <div class="d-flex">
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" id="diabetes" name="diabetes" value="Sim">
+                                <label class="btn btn-outline-secondary" for="diabetes">Sim</label>
+                                <input type="radio" class="btn-check" id="diabetes_2" name="diabetes" value="Não">
+                                <label class="btn btn-outline-secondary" for="diabetes_2">Não</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <label class="linha cores p-2" for="obesidade">Obesidade: IMC &ge; 30kg/m² ou CA &ge; 94 cm nos homens ou &ge; 80 cm de mulheres</label>
+                        <div class="d-flex">
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" id="obesidade" name="obesidade" value="Sim">
+                                <label class="btn btn-outline-secondary" for="obesidade">Sim</label>
+                                <input type="radio" class="btn-check" id="obesidade_2" name="obesidade" value="Não">
+                                <label class="btn btn-outline-secondary" for="obesidade_2">Não</label>
+                            </div>
+                        </div>
                     </div>
         
-                    <label for="tabagismo">Tabagismo</label>
-                    <div class="text-end">
-                        <input type="radio" class="btn-check" id="tabagismo" name="tabagismo" value="Sim">
-                        <label class="btn btn-outline-secondary" for="tabagismo">Sim</label>
-                        <input type="radio" class="btn-check" id="tabagismo_2" name="tabagismo" value="Não">
-                        <label class="btn btn-outline-secondary" for="tabagismo_2">Não</label>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <label class="linha cores p-2" for="dislipidemia">Dislipidemia: triglicerídeos &gt; 150 mg/dL e/ou LDL-C &gt; 100 mg/dL e/ou HDL-C &lt; 40 mg/dL </label>
+                        <div class="d-flex">
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" id="dislipidemia" name="dislipidemia" value="Sim">
+                                <label class="btn btn-outline-secondary" for="dislipidemia">Sim</label>
+                                <input type="radio" class="btn-check" id="dislipidemia_2" name="dislipidemia" value="Não">
+                                <label class="btn btn-outline-secondary" for="dislipidemia_2">Não</label>
+                            </div>
                     </div>
-        
-                    <label for="diabetes">Diabetes melito (DM) já confirmado (glicemia de jejum de, pelo menos, 8 horas &ge; 126mg/dL, glicemia aleatória &ge; 200mg/dL ou HbA1c &ge; 6,5%) ou pré-diabetes (glicemia de jejum entre 100 e 125 mg/dL ou HbA1c entre 5,7 e 6,4%)</label>
-                    <div class="text-end">
-                        <input type="radio" class="btn-check" id="diabetes" name="diabetes" value="Sim">
-                        <label class="btn btn-outline-secondary" for="diabetes">Sim</label>
-                        <input type="radio" class="btn-check" id="diabetes_2" name="diabetes" value="Não">
-                        <label class="btn btn-outline-secondary" for="diabetes_2">Não</label>
-                    </div>
-        
-                    <label for="obesidade">Obesidade: IMC &ge; 30kg/m² ou CA &ge; 94 cm nos homens ou &ge; 80 cm de mulheres</label>
-                    <div class="text-end">
-                        <input type="radio" class="btn-check" id="obesidade" name="obesidade" value="Sim">
-                        <label class="btn btn-outline-secondary" for="obesidade">Sim</label>
-                        <input type="radio" class="btn-check" id="obesidade_2" name="obesidade" value="Não">
-                        <label class="btn btn-outline-secondary" for="obesidade_2">Não</label>
-                    </div>
-        
-                    <label for="dislipidemia">Dislipidemia: triglicerídeos &gt; 150 mg/dL e/ou LDL-C &gt; 100 mg/dL e/ou HDL-C &lt; 40 mg/dL </label>
-                    <div class="text-end">
-                        <input type="radio" class="btn-check" id="dislipidemia" name="dislipidemia" value="Sim">
-                        <label class="btn btn-outline-secondary" for="dislipidemia">Sim</label>
-                        <input type="radio" class="btn-check" id="dislipidemia_2" name="dislipidemia" value="Não">
-                        <label class="btn btn-outline-secondary" for="dislipidemia_2">Não</label>
                     </div>
                 </div>
             </div>
@@ -211,52 +244,62 @@
             <div class="row gx-5 mb-5">
                 <div class="col">                    
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="hipertrofia_ventricular">Hipertrofia Ventricular Esquerda (HVE):</label>
+                        <label class="linha cores p-2" for="hipertrofia_ventricular">Hipertrofia Ventricular Esquerda (HVE):</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="hipertrofia_ventricular" id="hipertrofia_ventricular_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="hipertrofia_ventricular_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="hipertrofia_ventricular" id="hipertrofia_ventricular_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="hipertrofia_ventricular_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="hipertrofia_ventricular" id="hipertrofia_ventricular_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="hipertrofia_ventricular_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="hipertrofia_ventricular" id="hipertrofia_ventricular_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="hipertrofia_ventricular_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="microalbuminuria">Hipertrofia Microalbuminúria: 30 - 300 mg/ 24 horas ou relação albumina/creatinina urinária 30 - 300mg/g:</label>
+                        <label class="linha cores p-2" for="microalbuminuria">Hipertrofia Microalbuminúria: 30 - 300 mg/ 24 horas ou relação albumina/creatinina urinária 30 - 300mg/g:</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="microalbuminuria" id="microalbuminuria_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="microalbuminuria_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="microalbuminuria" id="microalbuminuria_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="microalbuminuria_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="microalbuminuria" id="microalbuminuria_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="microalbuminuria_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="microalbuminuria" id="microalbuminuria_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="microalbuminuria_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="doenca_renal_cronica">Doença renal crônica estágio 3 (RFG-e 30 - 60 ml/min/1,73m²):</label>
+                        <label class="linha cores p-2" for="doenca_renal_cronica">Doença renal crônica estágio 3 (RFG-e 30 - 60 ml/min/1,73m²):</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="doenca_renal_cronica" id="doenca_renal_cronica_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="doenca_renal_cronica_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="doenca_renal_cronica" id="doenca_renal_cronica_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="doenca_renal_cronica_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="doenca_renal_cronica" id="doenca_renal_cronica_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="doenca_renal_cronica_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="doenca_renal_cronica" id="doenca_renal_cronica_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="doenca_renal_cronica_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="indice_tornozelo">Índice tornozelo -braquial (ITB): < 0,9¹</label>
+                        <label class="linha cores p-2" for="indice_tornozelo">Índice tornozelo -braquial (ITB): < 0,9¹</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="indice_tornozelo" id="indice_tornozelo_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="indice_tornozelo_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="indice_tornozelo" id="indice_tornozelo_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="indice_tornozelo_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="indice_tornozelo" id="indice_tornozelo_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="indice_tornozelo_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="indice_tornozelo" id="indice_tornozelo_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="indice_tornozelo_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="espessura_mediointimal">Espessura mediointimal (EMI) da carótida: > 0,9 mm ou placa carotídea, se indicado¹∙²</label>
+                        <label class="linha cores p-2" for="espessura_mediointimal">Espessura mediointimal (EMI) da carótida: > 0,9 mm ou placa carotídea, se indicado¹∙²</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="espessura_mediointimal" id="espessura_mediointimal_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="espessura_mediointimal_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="espessura_mediointimal" id="espessura_mediointimal_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="espessura_mediointimal_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="espessura_mediointimal" id="espessura_mediointimal_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="espessura_mediointimal_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="espessura_mediointimal" id="espessura_mediointimal_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="espessura_mediointimal_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
@@ -272,109 +315,148 @@
             <div class="row gx-5 mb-5">
                 <div class="col">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="ave_isquêmico">AVE isquêmico ou;</label>
+                        <label class="linha cores p-2" for="ave_isquêmico">AVE isquêmico ou;</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="ave_isquêmico" id="ave_isquemico_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="ave_isquemico_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="ave_isquêmico" id="ave_isquemico_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="ave_isquemico_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="ave_isquêmico" id="ave_isquemico_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="ave_isquemico_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="ave_isquêmico" id="ave_isquemico_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="ave_isquemico_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="hemorragia_cerebral">Hemorragia cerebral ou;</label>
+                        <label class="linha cores p-2" for="hemorragia_cerebral">Hemorragia cerebral ou;</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="hemorragia_cerebral" id="hemorragia_cerebral_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="hemorragia_cerebral_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="hemorragia_cerebral" id="hemorragia_cerebral_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="hemorragia_cerebral_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="hemorragia_cerebral" id="hemorragia_cerebral_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="hemorragia_cerebral_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="hemorragia_cerebral" id="hemorragia_cerebral_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="hemorragia_cerebral_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="ataque_isquemico">Ataque isquêmico transitório (AIT).</label>
+                        <label class="linha cores p-2" for="ataque_isquemico">Ataque isquêmico transitório (AIT).</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="ataque_isquemico" id="ataque_isquemico_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="ataque_isquemico_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="ataque_isquemico" id="ataque_isquemico_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="ataque_isquemico_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="ataque_isquemico" id="ataque_isquemico_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="ataque_isquemico_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="ataque_isquemico" id="ataque_isquemico_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="ataque_isquemico_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="angina_estavel">Angina estável ou instável ou;</label>
+                        <label class="linha cores p-2" for="angina_estavel">Angina estável ou instável ou;</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="angina_estavel" id="angina_estavel_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="angina_estavel_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="angina_estavel" id="angina_estavel_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="angina_estavel_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="angina_estavel" id="angina_estavel_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="angina_estavel_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="angina_estavel" id="angina_estavel_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="angina_estavel_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="infarto_miocardio">Infarto do Miocárdio ou;</label>
+                        <label class="linha cores p-2" for="infarto_miocardio">Infarto do Miocárdio ou;</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="infarto_miocardio" id="infarto_miocardio_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="infarto_miocardio_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="infarto_miocardio" id="infarto_miocardio_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="infarto_miocardio_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="infarto_miocardio" id="infarto_miocardio_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="infarto_miocardio_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="infarto_miocardio" id="infarto_miocardio_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="infarto_miocardio_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="revascularizacao_miocardio">Revascularização do miocardio (angioplastia ou cirurgia) ou;</label>
+                        <label class="linha cores p-2" for="revascularizacao_miocardio">Revascularização do miocardio (angioplastia ou cirurgia) ou;</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="revascularizacao_miocardio" id="revascularizacao_miocardio_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="revascularizacao_miocardio_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="revascularizacao_miocardio" id="revascularizacao_miocardio_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="revascularizacao_miocardio_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="revascularizacao_miocardio" id="revascularizacao_miocardio_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="revascularizacao_miocardio_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="revascularizacao_miocardio" id="revascularizacao_miocardio_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="revascularizacao_miocardio_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="clinica_insuficiencia_cardiaca">Clínica de insuficiência cardíaca e/ou fração de ejeção reduzida FEVE &lt; 40;</label>
+                        <label class="linha cores p-2" for="clinica_insuficiencia_cardiaca">Clínica de insuficiência cardíaca e/ou fração de ejeção reduzida FEVE &lt; 40;</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="clinica_insuficiencia_cardiaca" id="clinica_insuficiencia_cardiaca_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="clinica_insuficiencia_cardiaca_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="clinica_insuficiencia_cardiaca" id="clinica_insuficiencia_cardiaca_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="clinica_insuficiencia_cardiaca_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="clinica_insuficiencia_cardiaca" id="clinica_insuficiencia_cardiaca_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="clinica_insuficiencia_cardiaca_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="clinica_insuficiencia_cardiaca" id="clinica_insuficiencia_cardiaca_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="clinica_insuficiencia_cardiaca_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="doenca_arterial_periferica">Doença arterial periférica sintomática dos membros inferiores ou;</label>
+                        <label class="linha cores p-2" for="doenca_arterial_periferica">Doença arterial periférica sintomática dos membros inferiores ou;</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="doenca_arterial_periferica" id="doenca_arterial_periferica_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="doenca_arterial_periferica_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="doenca_arterial_periferica" id="doenca_arterial_periferica_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="doenca_arterial_periferica_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="doenca_arterial_periferica" id="doenca_arterial_periferica_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="doenca_arterial_periferica_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="doenca_arterial_periferica" id="doenca_arterial_periferica_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="doenca_arterial_periferica_nao">Não</label>
+                            </div>
                         </div>
                     </div>
         
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <label for="doenca_estagio_4">Doença renal crônica estagio 4 (RFG-e < 30 ml/min/1,73m²) ou albuminúria > (300mg / 24h) ou;</label>
+                        <label class="linha cores p-2" for="doenca_estagio_4">Doença renal crônica estagio 4 (RFG-e < 30 ml/min/1,73m²) ou albuminúria > (300mg / 24h) ou;</label>
                         <div class="d-flex">
-                            <input type="radio" class="btn-check" name="doenca_estagio_4" id="doenca_estagio_4_sim" value="Sim">
-                            <label class="btn btn-outline-secondary" for="doenca_estagio_4_sim">Sim</label>
-                            <input type="radio" class="btn-check" name="doenca_estagio_4" id="doenca_estagio_4_nao" value="Não">
-                            <label class="btn btn-outline-secondary" for="doenca_estagio_4_nao">Não</label>
+                            <div class="p-1">
+                                <input type="radio" class="btn-check" name="doenca_estagio_4" id="doenca_estagio_4_sim" value="Sim">
+                                <label class="btn btn-outline-secondary" for="doenca_estagio_4_sim">Sim</label>
+                                <input type="radio" class="btn-check" name="doenca_estagio_4" id="doenca_estagio_4_nao" value="Não">
+                                <label class="btn btn-outline-secondary" for="doenca_estagio_4_nao">Não</label>
+                            </div>
                         </div>
                     </div>
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <label for="doenca_estagio_4">Retinopatia avançada²: hemorragias, exsutados, papiledema ¹⋅³</label>
+                            <label class="linha cores p-2" for="doenca_estagio_4">Retinopatia avançada²: hemorragias, exsutados, papiledema ¹⋅³</label>
                             <div class="d-flex">
-                                <input type="radio" class="btn-check" name="retinopatia_avancada" id="retinopatia_avancada_sim" value="Sim">
-                                <label class="btn btn-outline-secondary" for="retinopatia_avancada_sim">Sim</label>
-                                <input type="radio" class="btn-check" name="retinopatia_avancada" id="retinopatia_avancada_nao" value="Não">
-                                <label class="btn btn-outline-secondary" for="retinopatia_avancada_nao">Não</label>
+                                <div class="p-1">
+                                        <input type="radio" class="btn-check" name="retinopatia_avancada" id="retinopatia_avancada_sim" value="Sim">
+                                        <label class="btn btn-outline-secondary " for="retinopatia_avancada_sim">Sim</label>
+                                        <input type="radio" class="btn-check" name="retinopatia_avancada" id="retinopatia_avancada_nao" value="Não">
+                                        <label class="btn btn-outline-secondary" for="retinopatia_avancada_nao">Não</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="d-grid gap-2 col-6 mx-auto mb-5">
-            <button type="submit" class="btn btn-outline-primary">Calcular Risco</button>
+        <div class="d-grid gap-2 col-6 mx-auto mb-5 ">
+            <button type="submit" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Calcular Risco</button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Nivel da estratificação Cardiovascular</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% if calculo_risco != None %}
+                    <p>Calculo de risco é {{calculo_risco}}</p>
+                    {% endif %}
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
         </div>
     </form>
 </body>

@@ -64,3 +64,19 @@ input[type="submit"] {
     text-align: center;
     color: #656565;
 }
+
+.cores{
+    background-color: #eaeaea;
+    border-radius: 10px;
+    max-width: 85%;
+    
+}
+
+
+.linha{
+    width: 100%;
+}
+
+.btn.btn-outline-secondary{
+    padding: 5px 20px 5px 20px;
+}
