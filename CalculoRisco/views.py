@@ -69,30 +69,79 @@ def calculo_risco(request):
             calculo_risco = "RISCO ALTO COM DOENÇA RENAL OU CARDIOVASCULAR ESTABELECIDA"
         elif quantidade_secao_2 >= 1:
             calculo_risco = "RISCO ALTO"
-            
         elif quantidade_secao_1 == 0 and pressao_arterial_sistolica < 130 and pressao_arterial_diastolica < 85 and diabetico == 'Sim':
             calculo_risco = "SEM RISCO"
+            
+         # SESSOES COM FATOR DE RISCO >=3
+        elif quantidade_secao_1 >= 3 and pressao_arterial_sistolica >= 130 and pressao_arterial_sistolica <= 139:
+            if pressao_arterial_diastolica >= 85 and pressao_arterial_diastolica <= 89:
+                calculo_risco = "RISCO MODERADO"
+            elif pressao_arterial_diastolica >= 90:
+                calculo_risco = "RISCO ALTO"
         
+        elif quantidade_secao_1 >= 3 and pressao_arterial_sistolica >= 140:
+            if pressao_arterial_diastolica >= 85:
+                calculo_risco = "RISCO ALTO"
+        
+        # SESSOES SEM FATOR DE RISCO, VERIFICAÇÕES PAS E PAD
         elif quantidade_secao_1 == 0 and pressao_arterial_sistolica >= 130 and pressao_arterial_sistolica <= 139:
             if pressao_arterial_diastolica >= 85 and pressao_arterial_diastolica <= 89:
                 calculo_risco = "SEM RISCO"
             elif pressao_arterial_diastolica >= 90 and pressao_arterial_diastolica <= 99:
                 calculo_risco = "RISCO BAIXO"
-                
+            elif pressao_arterial_diastolica >= 100 and pressao_arterial_diastolica <= 109:
+                calculo_risco = "RISCO MODERADO"
+            elif pressao_arterial_diastolica >= 110:
+                calculo_risco = "RISCO ALTO"
+            
         elif quantidade_secao_1 == 0 and pressao_arterial_sistolica >= 140 and pressao_arterial_sistolica <= 159:
-           if pressao_arterial_diastolica >= 90 and pressao_arterial_diastolica <= 99:
-            calculo_risco = "RISCO BAIXO"
-           elif pressao_arterial_diastolica >= 100 and pressao_arterial_diastolica <= 109:
-            calculo_risco = "RISCO MODERADO"
+            if pressao_arterial_diastolica >= 85 and pressao_arterial_diastolica <= 99:
+                calculo_risco = "RISCO BAIXO"
+            elif pressao_arterial_diastolica >= 100 and pressao_arterial_diastolica <= 109:
+                calculo_risco = "RISCO MODERADO"
+            elif pressao_arterial_diastolica >= 110:
+                calculo_risco = "RISCO ALTO"
+       
+        elif quantidade_secao_1 == 0 and pressao_arterial_sistolica >= 160 and pressao_arterial_sistolica <= 179:
+            if pressao_arterial_diastolica >= 85 and pressao_arterial_diastolica <= 109:
+                calculo_risco = "RISCO MODERADO"
+            elif pressao_arterial_diastolica >= 110:
+                calculo_risco = "RISCO ALTO"                
+                
+        elif quantidade_secao_1 == 0 and pressao_arterial_sistolica >= 180:
+            calculo_risco = "RISCO ALTO"
+            
+        # SESSOES COM FATOR DE RISCO 1-2
+        elif(quantidade_secao_1 == 1 or quantidade_secao_1 == 2) and pressao_arterial_sistolica >= 140 and pressao_arterial_sistolica <= 159:
+            if pressao_arterial_diastolica >= 85 and pressao_arterial_diastolica <= 99:
+                calculo_risco = "RISCO MODERADO"
+            elif pressao_arterial_diastolica >= 100 and pressao_arterial_diastolica <= 109:
+                calculo_risco = "RISCO ALTO"
+            elif pressao_arterial_diastolica >= 110:
+                calculo_risco = "RISCO ALTO" 
+                   
+        elif (quantidade_secao_1 == 1 or quantidade_secao_1 == 2) and pressao_arterial_sistolica >= 130 and pressao_arterial_sistolica <= 139:
+            if pressao_arterial_diastolica >= 85 and pressao_arterial_diastolica <= 89:
+                calculo_risco = "RISCO BAIXO"
+            elif pressao_arterial_diastolica >= 90 and pressao_arterial_diastolica <= 99:
+                calculo_risco = "RISCO MODERADO"
+            elif pressao_arterial_diastolica >= 100:
+                calculo_risco = "RISCO ALTO"
 
-               
+        elif (quantidade_secao_1 == 1 or quantidade_secao_1 == 2) and pressao_arterial_sistolica >= 160 and pressao_arterial_sistolica <= 179:
+            if pressao_arterial_diastolica >= 85 and pressao_arterial_diastolica <= 110:
+                calculo_risco = "RISCO ALTO"
+                
+        elif (quantidade_secao_1 == 1 or quantidade_secao_1 == 2) and pressao_arterial_sistolica >= 180:
+            if pressao_arterial_diastolica >= 85:
+                calculo_risco = "RISCO ALTO"
+
+        elif (quantidade_secao_1 == 1 or quantidade_secao_1) == 2 or quantidade_secao_1 >=3:
+            if pressao_arterial_sistolica < 130 and pressao_arterial_diastolica < 85 and diabetico == 'Sim':
+                calculo_risco = "SEM RISCO"
         
-        print(quantidade_secao_1)
-        print(quantidade_secao_2)
-        print(quantidade_secao_3)
-      
-    
         
+                
         context = {
             'calculo_risco': calculo_risco,
         }
